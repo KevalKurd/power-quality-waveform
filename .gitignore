@@ -1,0 +1,18 @@
+# CLion / JetBrains
+.idea/
+
+# CMake build folders
+cmake-build-debug/
+cmake-build-release/
+build/
+
+# Compiled files
+*.exe
+*.o
+*.obj
+
+# CMake generated files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile

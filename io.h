@@ -1,0 +1,8 @@
+//
+// Created by k3-mustafa on 30/04/2026.
+//
+
+#ifndef POWER_QUALITY_ANALYSER_IO_H
+#define POWER_QUALITY_ANALYSER_IO_H
+
+#endif //POWER_QUALITY_ANALYSER_IO_H
