@@ -77,19 +77,19 @@ WaveformSample *load_csv_file(const char *filename, int *count) {
     // Skip the first line (header row in CSV)
     fgets(line, sizeof(line), file);
 
-    // Loop through each row and store values into struct
     for (int i = 0; i < *count; i++) {
+        if (fscanf(file, "%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf",
+                   &(data + i)->timestamp,
+                   &(data + i)->phase_A_voltage,
+                   &(data + i)->phase_B_voltage,
+                   &(data + i)->phase_C_voltage,
+                   &(data + i)->line_current,
+                   &(data + i)->frequency,
+                   &(data + i)->power_factor,
+                   &(data + i)->thd_percent) != 8) {
 
-        // Read one line of CSV data and store values into struct fields
-        fscanf(file, "%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf",
-               &(data + i)->timestamp,          // time value
-               &(data + i)->phase_A_voltage,    // phase A voltage
-               &(data + i)->phase_B_voltage,    // phase B voltage
-               &(data + i)->phase_C_voltage,    // phase C voltage
-               &(data + i)->line_current,       // current
-               &(data + i)->frequency,          // frequency
-               &(data + i)->power_factor,       // power factor
-               &(data + i)->thd_percent);       // harmonic distortion
+            printf("Error reading line %d\n", i + 2);
+        }
     }
 
     // Close file after reading
