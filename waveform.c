@@ -55,3 +55,34 @@ double calculate_peak_to_peak(WaveformSample *data, int count, char phase) {
     // peak-to-peak = max - min
     return max - min;
 }
+// Calculate DC offset (average voltage)
+double calculate_dc_offset(WaveformSample *data, int count, char phase) {
+    double sum = 0.0;
+    double value;
+
+    for (int i = 0; i < count; i++) {
+        value = get_phase_voltage(data + i, phase);
+        sum += value;
+    }
+
+    // Mean value
+    return sum / count;
+}
+
+// Count how many samples exceed clipping limit
+int detect_clipping(WaveformSample *data, int count, char phase) {
+    int clipping_count = 0;
+    double value;
+
+    for (int i = 0; i < count; i++) {
+
+        value = get_phase_voltage(data + i, phase);
+
+        // Check both positive and negative peaks
+        if (fabs(value) >= 324.9) {
+            clipping_count++;
+        }
+    }
+
+    return clipping_count;
+}
