@@ -86,3 +86,20 @@ int detect_clipping(WaveformSample *data, int count, char phase) {
 
     return clipping_count;
 }
+
+int check_tolerance(double rms) {
+
+    // Nominal UK voltage is 230V
+    double nominal_voltage = 230.0;
+
+    // Calculate upper and lower limits (±10%)
+    double lower_limit = nominal_voltage * 0.90;
+    double upper_limit = nominal_voltage * 1.10;
+
+    // Check if RMS value is inside acceptable range
+    if (rms >= lower_limit && rms <= upper_limit) {
+        return 1;  // within tolerance
+    } else {
+        return 0;  // outside tolerance
+    }
+}
