@@ -1,14 +1,10 @@
-//
-// Created by k3-mustafa on 30/04/2026.
-//
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "io.h"
 
 int main(int argc, char *argv[]) {
-    int count;                     // Will store number of samples in CSV
-    WaveformSample *data;          // Pointer to dynamically allocated array
+    int count; // Will store number of samples in CSV
+    WaveformSample *data; // Pointer to dynamically allocated array
 
     // Check that the user provided a filename
     if (argc != 2) {
