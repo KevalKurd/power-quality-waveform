@@ -2,8 +2,6 @@
 // Created by k3-mustafa on 30/04/2026.
 //
 
-#ifndef POWER_QUALITY_ANALYSER_WAVEFORM_H
-#define POWER_QUALITY_ANALYSER_WAVEFORM_H
 #ifndef WAVEFORM_H
 #define WAVEFORM_H
 
@@ -19,4 +17,3 @@ typedef struct {
 } WaveformSample;
 
 #endif
-#endif //POWER_QUALITY_ANALYSER_WAVEFORM_H
