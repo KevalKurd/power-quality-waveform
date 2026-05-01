@@ -123,8 +123,15 @@ void write_results_file(const char *filename, WaveformSample *data, int count) {
     fprintf(file, "Phase A RMS: %.3f V\n", rms_A);
     fprintf(file, "Phase A Peak-to-Peak: %.3f V\n",
             calculate_peak_to_peak(data, count, 'A'));
+
     fprintf(file, "Phase A DC Offset: %.3f V\n",
             calculate_dc_offset(data, count, 'A'));
+    // Statistical analysis for Phase A
+    fprintf(file, "Phase A Variance: %.3f\n",
+            calculate_variance(data, count, 'A'));
+
+    fprintf(file, "Phase A Standard Deviation: %.3f V\n",
+            calculate_standard_deviation(data, count, 'A'));
     fprintf(file, "Phase A Clipping Samples: %d\n",
             detect_clipping(data, count, 'A'));
     fprintf(file, "Phase A Tolerance: %s\n\n",
@@ -134,8 +141,16 @@ void write_results_file(const char *filename, WaveformSample *data, int count) {
     fprintf(file, "Phase B RMS: %.3f V\n", rms_B);
     fprintf(file, "Phase B Peak-to-Peak: %.3f V\n",
             calculate_peak_to_peak(data, count, 'B'));
+
     fprintf(file, "Phase B DC Offset: %.3f V\n",
             calculate_dc_offset(data, count, 'B'));
+    // Statistical analysis for Phase B
+    fprintf(file, "Phase B Variance: %.3f\n",
+            calculate_variance(data, count, 'B'));
+
+    fprintf(file, "Phase B Standard Deviation: %.3f V\n",
+            calculate_standard_deviation(data, count, 'B'));
+
     fprintf(file, "Phase B Clipping Samples: %d\n",
             detect_clipping(data, count, 'B'));
     fprintf(file, "Phase B Tolerance: %s\n\n",
@@ -145,8 +160,16 @@ void write_results_file(const char *filename, WaveformSample *data, int count) {
     fprintf(file, "Phase C RMS: %.3f V\n", rms_C);
     fprintf(file, "Phase C Peak-to-Peak: %.3f V\n",
             calculate_peak_to_peak(data, count, 'C'));
+
     fprintf(file, "Phase C DC Offset: %.3f V\n",
             calculate_dc_offset(data, count, 'C'));
+    // Statistical analysis for Phase C
+    fprintf(file, "Phase C Variance: %.3f\n",
+            calculate_variance(data, count, 'C'));
+
+    fprintf(file, "Phase C Standard Deviation: %.3f V\n",
+            calculate_standard_deviation(data, count, 'C'));
+
     fprintf(file, "Phase C Clipping Samples: %d\n",
             detect_clipping(data, count, 'C'));
     fprintf(file, "Phase C Tolerance: %s\n",
