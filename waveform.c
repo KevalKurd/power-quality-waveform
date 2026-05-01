@@ -1,28 +1,57 @@
-//
-// Created by k3-mustafa on 30/04/2026.
-//
+#include <math.h>
+#include "waveform.h"
 
-#include <math.h> //For sqrt() function
-#include "waveform.h" //Includes the waveform struct
+// This function returns the voltage for the selected phase (A, B or C)
+double get_phase_voltage(WaveformSample *sample, char phase) {
+    if (phase == 'A')
+        return sample->phase_A_voltage;
+    else if (phase == 'B')
+        return sample->phase_B_voltage;
+    else
+        return sample->phase_C_voltage;
+}
 
-//Function to calculate RMS Voltage for a selected phase (A, B or C)
+// This function calculates RMS voltage for a given phase
 double calculate_rms(WaveformSample *data, int count, char phase) {
-    double sum = 0.0; //Stores sum of squared voltage values
-    double value; //Temporary variable to hold each sample value
+    double sum = 0.0;     // stores sum of squared values
+    double value;         // current voltage value
 
-    //Loop through all samples in the dataset
+    // loop through all samples
     for (int i = 0; i < count; i++) {
 
-        //Select which phase voltage to use based on input character
-        if (phase == 'A')
-            value = (data + i)->phase_A_voltage;
-        else if (phase == 'B')
-            value = (data + i)->phase_B_voltage;
-        else
-            value = (data + i)->phase_C_voltage;
+        // get voltage using pointer arithmetic
+        value = get_phase_voltage(data + i, phase);
 
+        // square the value and add to sum
         sum += value * value;
     }
 
+    // return RMS = sqrt(mean of squares)
     return sqrt(sum / count);
+}
+
+// This function calculates peak-to-peak voltage
+double calculate_peak_to_peak(WaveformSample *data, int count, char phase) {
+
+    // start by assuming first value is both min and max
+    double max = get_phase_voltage(data, phase);
+    double min = get_phase_voltage(data, phase);
+    double value;
+
+    // loop through remaining samples
+    for (int i = 1; i < count; i++) {
+
+        value = get_phase_voltage(data + i, phase);
+
+        // update max if larger value found
+        if (value > max)
+            max = value;
+
+        // update min if smaller value found
+        if (value < min)
+            min = value;
+    }
+
+    // peak-to-peak = max - min
+    return max - min;
 }
