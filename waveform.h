@@ -14,6 +14,13 @@ typedef struct {
     double frequency;
     double power_factor;
     double thd_percent;
+
 } WaveformSample;
+
+// Function Version1.0
+double calculate_rms(WaveformSample *data, int count, char phase);
+double calculate_peak_to_peak(WaveformSample *data, int count, char phase);
+double calculate_dc_offset(WaveformSample *data, int count, char phase);
+int detect_clipping(WaveformSample *data, int count, char phase);
 
 #endif
